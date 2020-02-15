@@ -167,3 +167,12 @@ http://man.openbsd.org/OpenBSD-current/man1/tmux.1
 可以通过 $HOME/.tmux.conf 更改配置, 参考一些比较好的 tmux 配置:
 https://github.com/gpakosz/.tmux
 
+-----------------------------------问答部分--------------------------------
+
+: 搭车问个tmux的问题，就是屏幕输出超过一屏以后，前面的就显示不全了，这个有办法解决吗？ 
+答：ctrl-b [ 然后pageup 或者ctrl-b 直接pageup
+：版本比较新的话，.tmux.conf里加上 set mouse on后 可以鼠标滚动翻页 
+  
+
+
+
