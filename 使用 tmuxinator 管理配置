@@ -1,0 +1,70 @@
+使用 tmuxinator 管理配置
+tmuxinator 是一个用于编写和管理不同 tmux 配置文件的小工具。我们在 YAML 文件中定义窗口布局和命令，然后用 tmuxinator 来加载。tmuxinator 
+可以对配置文件进行集中管理，并且易于创建复杂布局。通过它还可以指定每个窗口开启前需执行的命令。
+tmuxinator 依赖 Ruby。
+通过 Rubygems 安装：
+$sudo gem install tmuxinator
+tmuxinator 需要有 EDITOR 环境变量，可以在 Linux 的 .bashrc 或 OS X 的 .bash_profile 上设置：
+export EDITOR=vim
+创建一个 tmuxinator 项目 development:
+$ tmuxinator open development
+执行后会用你的编辑器显示项目的默认配置信息，如：
+#scripting/default.yaml​project_name​: Tmuxinatorproject_root: ~/code/rails_project​socket_name​: foo 
+# Not needed. Remove to use default socketrvm: 1.9.2@rails_projectpre: sudo /etc/rc.d/mysqld starttabs:
+  - editor:
+    layout: main-vertical
+    panes:
+      - vim
+      - #empty, will just run plain bash
+      - top
+  - shell: git pull
+  - database: rails db
+  - server: rails s
+  - logs: tail -f logs/development.log
+  - console: rails c
+  - capistrano:
+  - server: ssh me@myhost
+  该 YAML 文件定义了一个 tmux 会话，其中有 8 个窗口。第一个窗口中有 3 个窗格，使用 main-vertical 布局。其它的窗口都开启和运行了各种的服务
+  和程序。同时，还可以指定在每个窗口加载时会自动运行的命令。
+先创建一个开发环境，其中 Vim 在上面，一个终端在下面：
+#scripting/development.yaml, Tmuxinator 0.8.1name: devprojectroot: ~/devprojectwindows:
+  - editor:
+      layout: main-horizontal
+      panes:
+        - vim
+        - #empty, will just run plain bash
+  - console: # empty
+YAML 文件使用 2 个空格表示缩进。
+开启该环境：
+$tmuxinator development
+tmuxinator 会自动加载默认的 .tmux.conf 文件，然后再执行我们在 YAML 文件中指定的配置信息。
+重新打开配置文件修改：
+$tmuxinator open development
+配置文件默认都存放在 ~/.tmuxinator/ 目录下。tmuxinator 实质上是根据我们的配置文件生成脚本命令文件，然后再一一执行其中的命令。
+总结
+可用于脚本中的 tmux 命令
+命令	描述
+tmux new-session -s development -n editor	创建一个命名为 development 的会话，并且命名首窗口为 editor
+tmux attach -t development	关联到命名窗口 development
+tmux send-keys -t development ‘[keys]’ C-m	向命名会话 development 中的活动窗口或窗格发送按键，​C-m 相当于回车键
+tmux send-keys -t development:1.0 ‘[keys]’ C-m	向命名会话 development 中的第 1 个窗口中的第 0 个 窗格发送按键，C-m 相当于回车键
+tmux select-window -t development:1	使命名会话 development 中的第 1 个窗口成为活动窗口
+tmux split-window -v -p 10 -t development	将命名会话 development 中的当前窗口垂直分割，其中下面的窗格高度占 10%
+tmux select-layout -t development main-horizontal	为命名会话 development 选择布局
+tmux -f app.conf attach	加载 app.conf 配置文件，并关联到该配置文件生成的会话
+
+tmuxinator 命令
+命令	描述
+tmuxinator open [name]	在默认编辑器中打开或创建一个项目配置文件
+tmuxinator [name]	加载并运行该项目配置文件，创建（如果还没有创建）并关联创建的会话
+tmuxinator list	列出当前所有的项目
+tmuxinator copy [source] [destination]	复制项目配置文件
+tmuxinator delete [name]	删除项目配置文件
+tmuxinator implode	删除所有当前的项目配置文件
+tmuxinator doctor	诊断 tmuxinator 及系统中的配置文件
+参考资源：
+tmux: Productive Mouse-Free Development
+https://pragprog.com/book/bhtmux/tmux
+
+
+  
