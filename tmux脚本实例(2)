@@ -1,0 +1,9 @@
+写一个Bash脚本来完成初始化工作。 其实初始化工作区所需的命令甚少，无非是创建会话，分隔窗口，以及运行某些命令。
+
+# 创建名为my-session的会话
+tmux new-session -s 'my-session'# 水平分隔窗口
+tmux split-window -h# 水平分隔窗口，并在新窗口运行mongod
+tmux split-window -h 'mongod'# 给my-session的1号窗格（第二个）发送ls+回车
+tmux send-keys -t my-session.1 ls Enter
+
+上述脚本是Bash语法，可以保存为​init-workspace.sh​，调用它即可建立my-session工作区。 命令详细用法请参考手册页：​man tmux。
