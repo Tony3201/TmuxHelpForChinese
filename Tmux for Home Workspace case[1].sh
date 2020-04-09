@@ -1,5 +1,5 @@
 #########################################################################
-# Name: Tmux for home case[1]
+# Name: Tmux for Home Workspace case[1]
 # Version: 1.0
 # Author: Tony3201 
 # Created Time: Apr 08 2020		
