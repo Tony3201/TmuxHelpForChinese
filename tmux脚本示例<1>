@@ -5,13 +5,13 @@ then
     tmux new-session -d -s ssh // 后台新建一个session
     tmux split-window -h   // 切割窗口
     tmux select-pane -t 0  // 选择0号窗口
-    tmux send-keys "ssh zcmlc@host" C-m   //向选择的窗口发送指令
-    tmux send-keys "cd /home/zcmlc/go/src/pro" C-m
+    tmux send-keys "ssh abcde@host" C-m   //向选择的窗口发送指令
+    tmux send-keys "cd /home/abcde/go/src/pro" C-m
     tmux send-keys "ctl tail -f log" C-m
     tmux split-window -v    //多次切割后每个小窗口的编号会变化
     tmux select-pane -t 1
     tmux send-keys "command" C-m
-    tmux send-keys "cd /home/zcmlc/go/src/zcm_activity​" C-m
+    tmux send-keys "cd /home/abcde/go/src/zcm_activity​" C-m
     tmux select-pane -t 2
     tmux send-keys "mysql -uroot -p123456 --host 192.168.1.221 --sigint-ignore --auto-vertical-output" C-m
     tmux send-keys "use data" C-m
