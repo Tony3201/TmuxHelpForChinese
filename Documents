@@ -169,7 +169,7 @@ https://github.com/gpakosz/.tmux
 -----------------------------------问答部分--------------------------------
 
 : 搭车问个tmux的问题，就是屏幕输出超过一屏以后，前面的就显示不全了，这个有办法解决吗？ 
-答：ctrl-b [ 然后按page up键， page Down键
+答：ctrl-b [ 然后按键盘上的page up键， page Down键
 ：版本比较新的话，.tmux.conf里加上 set mouse on后 可以鼠标滚动翻页 
   
 
