@@ -5,7 +5,7 @@
 # Created Time: Apr 17 2020		
 #########################################################################
 #Need to install firefox,fortune,htop,iftop and tree command.This script just need normal permission for iftop to show 
-#the ipaddr,or you can use ifconfig command instead it.
+#the "ip addr" command,or you can use "ifconfig" command instead it.
 
 #!/bin/bash
 tmux new -s 1
